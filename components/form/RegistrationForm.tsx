@@ -446,7 +446,7 @@ export default function RegistrationForm() {
                 en="Focal Person for Water Efficiency Program"
                 required
                 autoComplete="name"
-                placeholder="Buong pangalan · Full name"
+                placeholder="Buong Pangalan (Full Name)"
                 value={data.focalPerson}
                 onChange={set('focalPerson')}
                 error={errors.focalPerson}
@@ -529,7 +529,7 @@ export default function RegistrationForm() {
                   <legend className="group-title">
                     <span className="attendee-badge">{i + 1}</span>
                     {i === 0 ? 'Unang Dadalo' : 'Pangalawang Dadalo'} <small>Attendee {i + 1}</small>
-                    {i === 1 && <span className="opt">Opsyonal · Optional</span>}
+                    {i === 1 && <span className="opt">Opsyonal (Optional)</span>}
                     {i === 1 && !attendeeIsBlank(a) && (
                       <button
                         type="button"
@@ -547,7 +547,7 @@ export default function RegistrationForm() {
                       en={`Name of attendee ${ordinal.en}`}
                       required={i === 0}
                       autoComplete="off"
-                      placeholder="Buong pangalan · Full name"
+                      placeholder="Buong Pangalan (Full Name)"
                       value={a.name}
                       onChange={setAtt(i, 'name')}
                       error={errors[k('name')]}

@@ -23,7 +23,7 @@ export function LabelText({ fil, en, required, optional }: LabelProps) {
             *
           </span>
         )}
-        {optional && <span className="opt">Opsyonal · Optional</span>}
+        {optional && <span className="opt">Opsyonal (Optional)</span>}
       </span>
       <span className="label-en">{en}</span>
     </>
@@ -119,7 +119,7 @@ export function CitySelect(p: CitySelectProps) {
           onChange={(e) => p.onChange(e.target.value)}
           className={p.value ? '' : 'is-placeholder'}
         >
-          <option value="">Pumili · Select</option>
+          <option value="">Pumili (Select)</option>
           {PROVINCES.map((prov) => (
             <optgroup key={prov} label={prov}>
               {LOCATIONS[prov].map((c) => (

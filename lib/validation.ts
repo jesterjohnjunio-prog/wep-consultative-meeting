@@ -3,12 +3,12 @@ import { ALL_CITIES, GENDERS } from './config';
 import type { AttendeeInput, FieldErrors, RegistrationInput } from './types';
 
 export const MSG = {
-  required: 'Kinakailangang sagutan · This field is required',
-  choose: 'Pumili ng isa · Please choose an option',
-  email: 'Hindi wastong email · Please enter a valid email address',
-  phone: 'Hindi wastong numero · Please enter a valid contact number',
-  consent: 'Kailangang sumang-ayon upang magpatuloy · You must agree to continue',
-  tooLong: 'Masyadong mahaba · This answer is too long',
+  required: 'Kinakailangang sagutan (This field is required)',
+  choose: 'Pumili ng isa (Please choose an option)',
+  email: 'Hindi wastong email (Please enter a valid email address)',
+  phone: 'Hindi wastong numero (Please enter a valid contact number)',
+  consent: 'Kailangang sumang-ayon upang magpatuloy (You must agree to continue)',
+  tooLong: 'Masyadong mahaba (This answer is too long)',
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
