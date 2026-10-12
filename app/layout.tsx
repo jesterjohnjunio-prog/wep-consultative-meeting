@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
+import { EVENT } from '@/lib/config';
 import './globals.css';
 
 const sans = Plus_Jakarta_Sans({
@@ -18,12 +19,11 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Barangay Consultative Meeting · MWSS RO Water Efficiency Program',
-  description:
-    'Registration for the Barangay Consultative Meeting of the MWSS Regulatory Office Water Efficiency Program — October 27, 2026, 1:00–5:00 PM, Manila Water Lakbayan Center.',
+  description: `Registration for the Barangay Consultative Meeting of the MWSS Regulatory Office Water Efficiency Program — ${EVENT.dateEn}, ${EVENT.time}, ${EVENT.venue}.`,
   icons: { icon: '/wep-logo.png', apple: '/wep-logo.png' },
   openGraph: {
     title: 'Barangay Consultative Meeting — MWSS RO Water Efficiency Program',
-    description: 'Register your barangay for the WEP Consultative Meeting on October 27, 2026.',
+    description: `Register your barangay for the WEP Consultative Meeting on ${EVENT.dateEn} at the ${EVENT.venue}.`,
     images: ['/wep-logo.png'],
   },
 };

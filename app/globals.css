@@ -244,17 +244,13 @@ img {
   text-shadow: 0 2px 24px rgba(2, 21, 48, 0.4);
 }
 .hero-title span {
-  display: table;
-  margin: 14px auto 0;
-  padding: 7px 16px;
-  font-size: clamp(0.8rem, 2.3vw, 1.08rem);
+  display: block;
+  margin: 12px auto 0;
+  font-size: clamp(0.85rem, 2.4vw, 1.15rem);
   font-weight: 800;
   letter-spacing: 0.12em;
   color: #ffd84d;
-  background: rgba(2, 21, 48, 0.38);
-  border: 1px solid rgba(255, 216, 77, 0.35);
-  border-radius: 999px;
-  text-shadow: none;
+  text-shadow: 0 2px 14px rgba(2, 21, 48, 0.55);
 }
 
 .event-chips {

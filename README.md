@@ -1,8 +1,8 @@
 # Barangay Consultative Meeting — MWSS RO Water Efficiency Program
 
 Registration form and results dashboard for the **Barangay Consultative Meeting** of the
-MWSS Regulatory Office Water Efficiency Program (October 27, 2026 · 1:00–5:00 PM ·
-Manila Water Lakbayan Center).
+MWSS Regulatory Office Water Efficiency Program (October 30, 2026 · 1:00–5:00 PM ·
+Manila Water Creativity Center).
 
 - **`/`** — animated splash screen (WEP logo), then a two-section bilingual (Filipino / English)
   form that follows the WEP Plan questionnaire. Responses are saved to Airtable.

@@ -3,11 +3,11 @@
 export const EVENT = {
   title: 'Barangay Consultative Meeting',
   program: 'MWSS RO Water Efficiency Program',
-  dateFil: 'Oktubre 27, 2026',
-  dateEn: 'October 27, 2026',
-  dateIso: '2026-10-27',
+  dateFil: 'Oktubre 30, 2026',
+  dateEn: 'October 30, 2026',
+  dateIso: '2026-10-30',
   time: '1:00 PM – 5:00 PM',
-  venue: 'Manila Water Lakbayan Center',
+  venue: 'Manila Water Creativity Center',
   /** Target headcount for the meeting (WEP Plan timeline: 60–70 pax). */
   capacity: 70,
   /** Maximum representatives per barangay. */

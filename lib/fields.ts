@@ -1,4 +1,4 @@
-import { ALL_CITIES, GENDERS, PROVINCES } from './config';
+import { ALL_CITIES, EVENT, GENDERS, PROVINCES } from './config';
 
 /** Airtable column names. Renaming a column in Airtable requires renaming it here too. */
 export const F = {
@@ -69,7 +69,7 @@ export const FIELD_SPECS: FieldSpec[] = [
   {
     name: F.willAttend,
     type: 'singleSelect',
-    description: 'Will representative/s attend the Consultative Meeting on October 27, 2026?',
+    description: `Will representative/s attend the Consultative Meeting on ${EVENT.dateEn}?`,
     options: yesNo(),
   },
   { name: F.attendeeCount, type: 'number', options: { precision: 0 } },
