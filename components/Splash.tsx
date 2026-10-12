@@ -50,13 +50,7 @@ export default function Splash() {
       <div className="splash-glow" />
 
       <div className="splash-stage">
-        <div className="splash-fall">
-          <div className="splash-bob">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="splash-logo" src="/wep-logo.png" alt="Water Efficiency Program logo" width={725} height={987} />
-            <span className="splash-shine" />
-          </div>
-        </div>
+        {/* Ripples and droplets sit behind the logo. */}
         <div className="splash-ripples">
           <span />
           <span />
@@ -69,6 +63,13 @@ export default function Splash() {
           <i />
           <i />
         </div>
+        <div className="splash-fall">
+          <div className="splash-bob">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="splash-logo" src="/wep-logo.png" alt="Water Efficiency Program logo" width={725} height={987} />
+            <span className="splash-shine" />
+          </div>
+        </div>
       </div>
 
       <div className="splash-text">
@@ -76,7 +77,6 @@ export default function Splash() {
         <h1 className="splash-title">
           Water Efficiency <span>Program</span>
         </h1>
-        <p className="splash-sub">Barangay Consultative Meeting</p>
       </div>
 
       <div className="splash-water">
@@ -90,24 +90,6 @@ export default function Splash() {
         </div>
         <div className="splash-water-body" />
       </div>
-
-      <div className="splash-loader">
-        <div className="splash-loader-track">
-          <span />
-        </div>
-        <p>Inihahanda ang form… · Preparing your form…</p>
-      </div>
-
-      <button
-        type="button"
-        className="splash-skip"
-        onClick={(e) => {
-          e.stopPropagation();
-          skip();
-        }}
-      >
-        Laktawan · Skip
-      </button>
     </div>
   );
 }

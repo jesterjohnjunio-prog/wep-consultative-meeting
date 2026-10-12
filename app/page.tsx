@@ -50,8 +50,8 @@ export default function Home() {
 
         <footer className="page-foot">
           <p>
-            Metropolitan Waterworks and Sewerage System — Regulatory Office
-            <span>Water Efficiency Program · {new Date().getFullYear()}</span>
+            Metropolitan Waterworks and Sewerage System Regulatory Office
+            <span>Water Efficiency Program · 2026</span>
           </p>
         </footer>
       </main>

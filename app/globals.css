@@ -188,7 +188,7 @@ img {
 .page {
   position: relative;
   z-index: 1;
-  max-width: 880px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 36px 16px 140px;
   transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -204,32 +204,33 @@ img {
   margin-bottom: 28px;
 }
 
-/* The MWSS RO logo has white lettering, so logos always sit on a deep-ocean panel. */
-.logo-bar,
-.logo-panel {
+/* Logos sit straight on the ocean: MWSS RO | WEP. The MWSS RO lettering is white,
+   so a soft shadow keeps it legible over the lighter top of the gradient. */
+.logo-bar {
   display: inline-flex;
   align-items: center;
-  gap: 22px;
-  padding: 14px 26px;
-  background: linear-gradient(135deg, rgba(3, 40, 88, 0.92), rgba(2, 24, 56, 0.92));
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 20px;
-  box-shadow: 0 18px 40px -18px rgba(2, 12, 30, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
+  justify-content: center;
+  gap: 28px;
+  max-width: 100%;
 }
 .logo-mwss {
-  height: 58px;
+  height: 88px;
   width: auto;
+  max-width: 100%;
+  filter: drop-shadow(0 2px 10px rgba(2, 21, 48, 0.45));
 }
 .logo-wep {
-  height: 66px;
+  flex: none;
+  height: 96px;
   width: auto;
-  filter: drop-shadow(0 0 10px rgba(95, 211, 243, 0.35));
+  filter: drop-shadow(0 4px 14px rgba(2, 21, 48, 0.4));
 }
 .logo-divider {
-  width: 1px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.22);
+  flex: none;
+  width: 2px;
+  height: 72px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .hero-title {
@@ -1095,6 +1096,7 @@ form > .callout-error {
 .splash-fall {
   position: absolute;
   inset: 0;
+  z-index: 2;
   animation: drop-fall 0.95s cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.15s both;
 }
 @keyframes drop-fall {
@@ -1144,6 +1146,7 @@ form > .callout-error {
 
 .splash-ripples {
   position: absolute;
+  z-index: 1;
   left: 50%;
   bottom: -12px;
 }
@@ -1169,6 +1172,7 @@ form > .callout-error {
 
 .splash-splash {
   position: absolute;
+  z-index: 1;
   left: 50%;
   bottom: 4px;
 }
@@ -1220,12 +1224,6 @@ form > .callout-error {
 .splash-title span {
   color: var(--sun);
 }
-.splash-sub {
-  margin: 10px 0 0;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.82);
-  animation: fade-up 0.8s ease 1.85s both;
-}
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(14px); filter: blur(4px); }
   to { opacity: 1; transform: none; filter: none; }
@@ -1266,63 +1264,6 @@ form > .callout-error {
   background: linear-gradient(180deg, #1793d3 0%, #0a5aa8 55%, #053a78 100%);
 }
 
-.splash-loader {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 7vh;
-  z-index: 3;
-  width: min(300px, 80vw);
-  margin: 0 auto;
-  text-align: center;
-  animation: fade-up 0.5s ease 0.5s both;
-}
-.splash-loader-track {
-  height: 4px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
-}
-.splash-loader-track span {
-  display: block;
-  width: 0;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #fff, var(--sun));
-  animation: load 3.1s cubic-bezier(0.4, 0.1, 0.3, 1) 0.4s forwards;
-}
-@keyframes load {
-  to { width: 100%; }
-}
-.splash-loader p {
-  margin: 10px 0 0;
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.88);
-}
-.splash-skip {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 4;
-  padding: 8px 16px;
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 999px;
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-}
-.splash-skip:hover {
-  background: rgba(255, 255, 255, 0.24);
-}
-.splash-skip:focus-visible {
-  outline: 3px solid var(--sun);
-  outline-offset: 2px;
-}
-
 /* =====================================================================
    Responsive
    ===================================================================== */
@@ -1349,20 +1290,33 @@ form > .callout-error {
   }
 }
 
+@media (max-width: 760px) {
+  .logo-bar {
+    gap: 20px;
+  }
+  .logo-mwss {
+    height: 64px;
+  }
+  .logo-wep {
+    height: 72px;
+  }
+  .logo-divider {
+    height: 54px;
+  }
+}
+
 @media (max-width: 520px) {
   .logo-bar {
     gap: 12px;
-    padding: 10px 16px;
-    border-radius: 16px;
   }
   .logo-mwss {
-    height: 36px;
+    height: clamp(40px, 12.5vw, 54px);
   }
   .logo-wep {
-    height: 46px;
+    height: clamp(48px, 15vw, 60px);
   }
   .logo-divider {
-    height: 34px;
+    height: 42px;
   }
   .event-chips li {
     font-size: 0.84rem;
