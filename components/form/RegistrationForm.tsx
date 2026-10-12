@@ -389,7 +389,7 @@ export default function RegistrationForm() {
                 multiline
                 maxLength={400}
                 autoComplete="street-address"
-                placeholder="Numero, kalye, barangay, lungsod · No., street, barangay, city"
+                placeholder="Numero, Kalye, Barangay, Lungsod (No., Street, Barangay, City)"
                 value={data.hallAddress}
                 onChange={set('hallAddress')}
                 error={errors.hallAddress}
