@@ -27,8 +27,10 @@ dashboard reads through `/api/responses`, both running on Vercel's servers.
 | Name | Required | Description |
 | --- | --- | --- |
 | `AIRTABLE_TOKEN` | yes | Airtable personal access token with scopes `data.records:read`, `data.records:write`, `schema.bases:read`, `schema.bases:write`, and access to the WEP base |
-| `AIRTABLE_BASE_ID` | yes | `appBTvrLNv8i0QLkX` |
-| `AIRTABLE_TABLE_ID` | recommended | `tblLvgSG9Capd7rLb` (the "BCG WEP" table). Using the ID means renaming the table in Airtable won't break the form |
+| `AIRTABLE_BASE_ID` | no | Defaults to the WEP base `appBTvrLNv8i0QLkX`. Set only to use a different base |
+| `AIRTABLE_TABLE_ID` | no | Defaults to the "BCG WEP" table `tblLvgSG9Capd7rLb` |
+
+In Vercel, make sure each variable is enabled for **Production** (not only Development).
 | `DASHBOARD_PASSWORD` | yes | Password for `/dashboard` — share only with the WEP team |
 | `SESSION_SECRET` | optional | Long random string used to sign dashboard sessions |
 
@@ -44,6 +46,25 @@ npm run dev
 
 Open http://localhost:3000 (form) and http://localhost:3000/dashboard (dashboard).
 
+## Check the connection
+
+Open **`/api/health`** on any deployment, e.g. https://wep-consultative-meeting.vercel.app/api/health.
+It reports whether the Airtable token is present and working and whether the dashboard password is
+set, without showing any secret values. `"ok": true` means everything is connected.
+
+## Connect Vercel to Airtable automatically
+
+With your token in `.env.local`, run:
+
+```bash
+npm run setup:vercel
+```
+
+It signs you in to Vercel (browser), links this folder to the existing Vercel project, saves
+`AIRTABLE_TOKEN` for Production and Preview (plus `DASHBOARD_PASSWORD` / `SESSION_SECRET` only if
+Vercel doesn't have them yet) as encrypted variables, and redeploys production. Run it again
+whenever you change the Airtable token.
+
 ## Deploy to Vercel through GitHub
 
 1. **Create a GitHub repository** (private is recommended), e.g. `wep-consultative-meeting`,
@@ -55,8 +76,8 @@ Open http://localhost:3000 (form) and http://localhost:3000/dashboard (dashboard
    ```
 3. In **Vercel** → *Add New… → Project* → *Import* the GitHub repository. The framework is
    detected as Next.js; keep the default build settings.
-4. Before clicking *Deploy*, open **Environment Variables** and add every variable from the
-   table above (for Production, Preview and Development).
+4. Before clicking *Deploy*, open **Environment Variables** and add `AIRTABLE_TOKEN` and
+   `DASHBOARD_PASSWORD` for Production — or skip this and run `npm run setup:vercel` afterwards.
 5. Click **Deploy**. Every later `git push` to `main` redeploys automatically.
 
 ## Airtable

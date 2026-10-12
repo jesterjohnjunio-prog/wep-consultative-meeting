@@ -4,6 +4,22 @@ import type { Registration, SchemaStatus } from './types';
 
 const API = 'https://api.airtable.com/v0';
 export const DEFAULT_TABLE_NAME = 'BCG WEP';
+// The WEP base and its "BCG WEP" table. These IDs are not secret, so they are built in;
+// only the token has to be provided through the environment.
+const DEFAULT_BASE_ID = 'appBTvrLNv8i0QLkX';
+const DEFAULT_TABLE_ID = 'tblLvgSG9Capd7rLb';
+
+/** Accepted names for the token, so a slightly different variable name in Vercel still works. */
+export const TOKEN_ENV_NAMES = ['AIRTABLE_TOKEN', 'AIRTABLE_PAT', 'AIRTABLE_ACCESS_TOKEN', 'AIRTABLE_API_KEY'];
+
+/** Reads the first non-empty variable, tolerating stray spaces or quotes pasted into Vercel. */
+function readEnv(names: string[]) {
+  for (const n of names) {
+    const v = process.env[n]?.trim().replace(/^["']|["']$/g, '').trim();
+    if (v) return { name: n, value: v };
+  }
+  return null;
+}
 
 export class AirtableError extends Error {
   constructor(
@@ -18,11 +34,57 @@ export class AirtableError extends Error {
 export class ConfigError extends Error {}
 
 function config() {
-  const token = process.env.AIRTABLE_TOKEN?.trim();
-  const baseId = process.env.AIRTABLE_BASE_ID?.trim();
-  const table = process.env.AIRTABLE_TABLE_ID?.trim() || process.env.AIRTABLE_TABLE_NAME?.trim() || DEFAULT_TABLE_NAME;
-  if (!token || !baseId) throw new ConfigError('AIRTABLE_TOKEN and AIRTABLE_BASE_ID must be set.');
+  const token = readEnv(TOKEN_ENV_NAMES)?.value;
+  const baseId = readEnv(['AIRTABLE_BASE_ID', 'AIRTABLE_BASE'])?.value ?? DEFAULT_BASE_ID;
+  const table =
+    readEnv(['AIRTABLE_TABLE_ID', 'AIRTABLE_TABLE_NAME', 'AIRTABLE_TABLE'])?.value ??
+    (baseId === DEFAULT_BASE_ID ? DEFAULT_TABLE_ID : DEFAULT_TABLE_NAME);
+  if (!token) throw new ConfigError('AIRTABLE_TOKEN is not set in this deployment.');
   return { token, baseId, table };
+}
+
+export interface ConnectionStatus {
+  ok: boolean;
+  tokenVariable: string | null;
+  usingDefaultBase: boolean;
+  problem?: string;
+}
+
+/** Checks the Airtable connection without exposing any secret values. */
+export async function connectionStatus(): Promise<ConnectionStatus> {
+  const tokenVar = readEnv(TOKEN_ENV_NAMES);
+  const usingDefaultBase = !readEnv(['AIRTABLE_BASE_ID', 'AIRTABLE_BASE']);
+  if (!tokenVar) {
+    return {
+      ok: false,
+      tokenVariable: null,
+      usingDefaultBase,
+      problem: 'AIRTABLE_TOKEN is missing. Add it in Vercel → Settings → Environment Variables, then redeploy.',
+    };
+  }
+  if (!tokenVar.value.startsWith('pat')) {
+    return {
+      ok: false,
+      tokenVariable: tokenVar.name,
+      usingDefaultBase,
+      problem: `${tokenVar.name} does not look like an Airtable personal access token (it should start with "pat").`,
+    };
+  }
+  try {
+    const { baseId, table } = config();
+    await request(`/${baseId}/${encodeURIComponent(table)}?pageSize=1`);
+    return { ok: true, tokenVariable: tokenVar.name, usingDefaultBase };
+  } catch (e) {
+    const problem =
+      e instanceof AirtableError
+        ? e.status === 401
+          ? 'Airtable rejected the token (it may be revoked or mistyped).'
+          : e.status === 403 || e.status === 404
+            ? 'The token cannot access the WEP base or table. Edit the token in Airtable and add the WEP base under "Access".'
+            : `Airtable error ${e.status} ${e.type}.`
+        : 'Could not reach Airtable.';
+    return { ok: false, tokenVariable: tokenVar.name, usingDefaultBase, problem };
+  }
 }
 
 async function request<T>(path: string, init: { method?: string; body?: unknown } = {}): Promise<T> {

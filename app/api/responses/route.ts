@@ -24,7 +24,7 @@ export async function GET() {
   } catch (e) {
     const message =
       e instanceof ConfigError
-        ? 'Airtable is not configured. Set AIRTABLE_TOKEN and AIRTABLE_BASE_ID.'
+        ? 'Airtable is not connected: AIRTABLE_TOKEN is missing in Vercel → Settings → Environment Variables. Add it, then redeploy. Open /api/health to check.'
         : e instanceof AirtableError
           ? `Airtable: ${e.message}`
           : 'Could not load responses.';

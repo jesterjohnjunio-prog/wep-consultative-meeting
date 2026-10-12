@@ -1,0 +1,2 @@
+# Files never uploaded by `vercel deploy` from this folder (secrets stay local).
+.env*
