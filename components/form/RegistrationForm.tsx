@@ -319,7 +319,9 @@ export default function RegistrationForm() {
                   Consultative Meeting at sa Water Efficiency Program (WEP). Maaari itong ibahagi sa mga concessionaire (Manila
                   Water Company, Inc. at Maynilad Water Services, Inc.) para lamang sa layuning ito. Ang inyong impormasyon ay
                   iingatan alinsunod sa Republic Act No. 10173 (Data Privacy Act of 2012) at hindi gagamitin sa ibang layunin nang
-                  walang inyong pahintulot.
+                  walang inyong pahintulot. Sa pagpili ng “Sumasang-ayon” (Agree), nagbibigay kayo ng pahintulot sa pagkalap at
+                  pagproseso ng impormasyong ibinigay, kabilang ang PWD status ng mga dumalo, para sa mga layuning ito. Maaari
+                  kayong makipag-ugnayan sa MWSS RO upang ma-access o maitama ang inyong impormasyon.
                 </p>
                 <p lang="en">
                   The MWSS Regulatory Office collects the personal information in this form for the registration, coordination and
