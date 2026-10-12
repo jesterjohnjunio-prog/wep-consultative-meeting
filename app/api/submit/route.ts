@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
   const errors = validateAll(input);
   if (Object.keys(errors).length) {
-    return fail(400, 'Pakisuri ang mga sagot na may marka · Please check the highlighted answers.', { errors });
+    return fail(400, 'Pakisuri ang mga sagot na may marka (Please check the highlighted answers.)', { errors });
   }
 
   const attendees =
@@ -75,9 +75,9 @@ export async function POST(req: Request) {
   } catch (e) {
     if (e instanceof ConfigError) {
       console.error('[submit] configuration error:', e.message);
-      return fail(503, 'Ang form ay hindi pa handa · The form is not configured yet. Please contact MWSS RO.');
+      return fail(503, 'Ang form ay hindi pa handa (The form is not configured yet. Please contact MWSS RO.)');
     }
     console.error('[submit] Airtable error:', e instanceof AirtableError ? `${e.status} ${e.type}: ${e.message}` : e);
-    return fail(502, 'Hindi naisumite ang form. Pakisubukang muli · We could not save your response. Please try again.');
+    return fail(502, 'Hindi naisumite ang form. Pakisubukang muli. (We could not save your response. Please try again.)');
   }
 }

@@ -127,7 +127,7 @@ export default function RegistrationForm() {
           if (Object.keys(json.errors).some((k) => !k.startsWith('attendees'))) setStep(1);
           focusFirstError(json.errors);
         }
-        throw new Error(json.message || 'Hindi naisumite · Submission failed. Please try again.');
+        throw new Error(json.message || 'Hindi naisumite (Submission failed. Please try again.)');
       }
       setResult({ ref: json.ref, data: payload });
       setStatus('done');
@@ -141,7 +141,7 @@ export default function RegistrationForm() {
       setStatus('idle');
       setServerError(
         e instanceof TypeError
-          ? 'Walang koneksyon sa internet · Network error. Please check your connection and try again.'
+          ? 'Walang koneksyon sa internet (Network error. Please check your connection and try again.)'
           : (e as Error).message,
       );
     }
@@ -191,7 +191,7 @@ export default function RegistrationForm() {
             <path className="success-drop-check" d="m38 98 15 15 30-32" fill="none" stroke="#fff" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <h2 className="success-title">Salamat po! · Thank you!</h2>
+        <h2 className="success-title">Salamat po! (Thank you!)</h2>
         <p className="success-lead">
           {result.data.willAttend === 'Yes'
             ? `Natanggap na ang rehistro ng ${withBarangay(result.data.barangay)}. Magkita-kita po tayo sa ${EVENT.dateFil}.`
@@ -219,10 +219,10 @@ export default function RegistrationForm() {
             }}
           >
             {copied ? <Check width={16} height={16} /> : <Copy width={16} height={16} />}
-            {copied ? 'Nakopya · Copied' : 'Kopyahin · Copy'}
+            {copied ? 'Nakopya (Copied)' : 'Kopyahin (Copy)'}
           </button>
         </div>
-        <p className="ref-note">Pakitago ang reference number na ito · Please keep this reference number for your records.</p>
+        <p className="ref-note">Pakitago ang reference number na ito (Please keep this reference number for your records.)</p>
 
         <dl className="summary">
           <div>
@@ -236,19 +236,19 @@ export default function RegistrationForm() {
             <dd>{result.data.focalPerson}</dd>
           </div>
           <div>
-            <dt>Dadalo · Attending</dt>
-            <dd>{result.data.willAttend === 'Yes' ? 'Oo · Yes' : 'Hindi · No'}</dd>
+            <dt>Dadalo (Attending)</dt>
+            <dd>{result.data.willAttend === 'Yes' ? 'Oo (Yes)' : 'Hindi (No)'}</dd>
           </div>
           {result.data.willAttend === 'Yes' && (
             <div>
-              <dt>Mga Dadalo · Attendees</dt>
+              <dt>Mga Dadalo (Attendees)</dt>
               <dd>{result.data.attendees.map((a) => a.name).join(', ')}</dd>
             </div>
           )}
         </dl>
 
         <button type="button" className="btn btn-primary" onClick={reset}>
-          Magsumite ng panibagong tugon · Submit another response
+          Magsumite ng panibagong tugon (Submit another response)
         </button>
       </section>
     );
@@ -297,7 +297,7 @@ export default function RegistrationForm() {
         {step === 1 ? (
           <div className="section" key="s1">
             <header className="section-head">
-              <p className="section-kicker">Unang Bahagi · Section 1</p>
+              <p className="section-kicker">Unang Bahagi (Section 1)</p>
               <h2>
                 Paabiso sa Data Privacy at Impormasyon ng Barangay
                 <span>Data Privacy &amp; Barangay Information</span>
@@ -506,7 +506,7 @@ export default function RegistrationForm() {
         ) : (
           <div className="section" key="s2">
             <header className="section-head">
-              <p className="section-kicker">Ikalawang Bahagi · Section 2</p>
+              <p className="section-kicker">Ikalawang Bahagi (Section 2)</p>
               <h2>
                 Impormasyon ng mga Inaasahang Dadalo
                 <span>Delegate / Attendee Information</span>
@@ -536,7 +536,7 @@ export default function RegistrationForm() {
                         className="btn btn-ghost btn-sm attendee-clear"
                         onClick={() => setData((d) => ({ ...d, attendees: [d.attendees[0], blankAttendee()] }))}
                       >
-                        Burahin · Clear
+                        Burahin (Clear)
                       </button>
                     )}
                   </legend>
@@ -613,11 +613,11 @@ export default function RegistrationForm() {
               }}
             >
               <ArrowLeft />
-              Bumalik · Back
+              Bumalik (Back)
             </button>
           ) : (
             <span className="actions-note">
-              <span className="req">*</span> Kinakailangan · Required
+              <span className="req">*</span> Kinakailangan (Required)
             </span>
           )}
           <button
@@ -628,16 +628,16 @@ export default function RegistrationForm() {
             {submitting ? (
               <>
                 <span className="spinner" aria-hidden="true" />
-                Isinusumite… · Submitting…
+                Isinusumite… (Submitting…)
               </>
             ) : finalLabel ? (
               <>
-                Isumite · Submit
+                Isumite (Submit)
                 <Check />
               </>
             ) : (
               <>
-                Susunod · Next
+                Susunod (Next)
                 <ArrowRight />
               </>
             )}
